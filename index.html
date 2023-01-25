@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Library</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <header>
+    <div class="Library">Library</div>
+    <div class="new_book">
+      <button>+ New Book</button>
+    </div>
+  </header>
+  <body>
+    <div class="modal">
+      <div class="modal_content">
+        <span class="close">&times;</span>
+        <form>
+          <ul class="pop_up">
+            <li class="title_form">
+              <label for="title">Title: </label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                pattern="^[a-zA-Z0-9_.-]*$"
+              />
+            </li>
+            <li class="author_form">
+              <label for="author">Author: </label>
+              <input
+                type="text"
+                id="author"
+                name="author"
+                pattern="^[a-zA-Z0-9_.-]*$"
+              />
+            </li>
+            <li class="pages_form">
+              <label for="pages">Page Count: </label>
+              <input type="number" id="pages" name="pages" pattern="^[0-9]*$" />
+            </li>
+            <li class="read_form">
+              <input type="checkbox" id="read" name="read" />
+              <label for="read">Read</label>
+            </li>
+            <li clas="not_read_form">
+              <input type="checkbox" id="not_read" name="not_read" />
+              <label for="not_read">Not Read</label>
+            </li>
+          </ul>
+        </form>
+      </div>
+    </div>
+    <ul class="bookshelf">
+      <li class="books"></li>
+    </ul>
+    <div class="buttons">
+      <div class="toggle_read">
+        <button class="read">Read</button>
+      </div>
+      <div class="toggle_remove">
+        <button class="remove">Remote</button>
+      </div>
+    </div>
+  </body>
+</html>
