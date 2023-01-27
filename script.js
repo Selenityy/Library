@@ -37,17 +37,31 @@ window.onload = function () {
     newBookInfo.classList.add("bookInfo");
     newBookDiv.appendChild(newBookInfo);
 
+    const newBookTitle = document.createElement("div");
+    newBookTitle.classList.add("bookTitle");
+    newBookInfo.appendChild(newBookTitle);
+
+    const newBookAuthor = document.createElement("div"); 
+    newBookAuthor.classList.add("bookAuthor");
+    newBookInfo.appendChild(newBookAuthor);
+
+    const newBookPages = document.createElement("div");
+    newBookPages.classList.add("bookPages");
+    newBookInfo.appendChild(newBookPages);
+
+    const newBookRead = document.createElement("div");
+    newBookRead.classList.add("bookRead");
+    newBookInfo.appendChild(newBookRead);
+
     const strTitle = document.getElementById("title").value;
     const strAuthor = document.getElementById("author").value;
     const strPages = document.getElementById("pages").value;
-    const strRead = document.getElementById("read").value;
-    const strNotRead = document.getElementById("not_read").value;
+    const strRead = document.querySelector('input[name="read"]:checked').value;
     const addBook = new Book(
       strTitle,
       strAuthor,
       strPages,
       strRead,
-      strNotRead
     );
 
     addBookToLibrary(addBook);
@@ -77,7 +91,6 @@ window.onload = function () {
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.not_read = notRead;
     console.log("did we get into Book?" + title);
   }
 
@@ -85,12 +98,14 @@ window.onload = function () {
     myLibrary.push(formResponse);
     for (let i = 0; i < myLibrary.length; i++) {
       console.log(myLibrary[i]);
-      document.getElementsByClassName("bookInfo")[i].innerHTML =
-        myLibrary[i].title +
-        myLibrary[i].author +
-        myLibrary[i].pages +
-        myLibrary[i].read +
-        myLibrary[i].notRead;
+        document.getElementsByClassName("bookTitle")[i].innerHTML =
+            myLibrary[i].title;
+        document.getElementsByClassName("bookAuthor")[i].innerHTML = 
+            "by " + myLibrary[i].author;
+        document.getElementsByClassName("bookPages")[i].innerHTML =
+            myLibrary[i].pages + " " + "total pages";
+        document.getElementsByClassName("bookRead")[i].innerHTML =
+            myLibrary[i].read;
       console.log("are we inside the loop?");
     }
     console.log("did we get into addBook?");
