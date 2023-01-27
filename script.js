@@ -4,21 +4,26 @@ window.onload = function () {
   const span = document.getElementsByClassName("close")[0];
   const submitBtn = document.getElementById("submitBtn");
   const books = document.querySelector("#books");
+  const form = document.getElementById("myForm");
+  const myLibrary = [];
 
   // clicking New Book button will show the modal window
   btn.onclick = function () {
     modal.style.display = "block";
+    form.reset();
   };
 
   // clicking the X on the modal window closes it
   span.onclick = function () {
     modal.style.display = "none";
+    form.reset();
   };
 
   // clicking out of the modal window closes it
   window.onclick = function (event) {
     if (event.target === modal) {
       modal.style.display = "none";
+      form.reset();
     }
   };
 
@@ -26,44 +31,71 @@ window.onload = function () {
   submitBtn.onclick = function (event) {
     const newBookDiv = document.createElement("div");
     newBookDiv.classList.add("newBook");
-    const text = document.createTextNode("test text");
-    newBookDiv.appendChild(text);
-
     books.appendChild(newBookDiv);
-    modal.style.display = "none";
+
+    const newBookInfo = document.createElement("div");
+    newBookInfo.classList.add("bookInfo");
+    newBookDiv.appendChild(newBookInfo);
+
+    const strTitle = document.getElementById("title").value;
+    const strAuthor = document.getElementById("author").value;
+    const strPages = document.getElementById("pages").value;
+    const strRead = document.getElementById("read").value;
+    const strNotRead = document.getElementById("not_read").value;
+    const addBook = new Book(
+      strTitle,
+      strAuthor,
+      strPages,
+      strRead,
+      strNotRead
+    );
+
+    addBookToLibrary(addBook);
+    console.log("Are we here instead?");
+
+    const newBookBtn = document.createElement("div");
+    newBookBtn.classList.add("bookBtn");
+    newBookDiv.appendChild(newBookBtn);
 
     const readBtn = document.createElement("button");
     readBtn.classList.add("toggle_read");
     readBtn.textContent = "Read";
-    const buttons = document.querySelector(".buttons");
-    buttons.appendChild(readBtn);
+    newBookBtn.appendChild(readBtn);
 
     const removeBtn = document.createElement("button");
     removeBtn.classList.add("toggle_remove");
     removeBtn.textContent = "Remove";
-    buttons.appendChild(removeBtn);
+    newBookBtn.appendChild(removeBtn);
+
+    modal.style.display = "none";
     event.preventDefault();
   };
 
-  // my library array where books will be stores
-  const myLibrary = [];
-
-  // function to add new books to the array
-  function Book(title, author, pages, read) {
+  function Book(title, author, pages, read, notRead) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.not_read = notRead;
+    console.log("did we get into Book?" + title);
   }
 
-  // example book being added to the array
-  const addBook = new Book("Autobiography", "Self", "200", "Read");
-  // console.log(addBook.title, addBook.author, addBook.pages, addBook.read);
-
-  // Write a function that loops through the array and displays each book on the page.
-  function addBookToLibrary() {
+  function addBookToLibrary(formResponse) {
+    myLibrary.push(formResponse);
     for (let i = 0; i < myLibrary.length; i++) {
       console.log(myLibrary[i]);
+      document.getElementsByClassName("bookInfo")[i].innerHTML +=
+        myLibrary[i].title;
+      document.getElementsByClassName("bookInfo")[i].innerHTML +=
+        myLibrary[i].author;
+      document.getElementsByClassName("bookInfo")[i].innerHTML +=
+        myLibrary[i].pages;
+      document.getElementsByClassName("bookInfo")[i].innerHTML +=
+        myLibrary[i].read;
+      document.getElementsByClassName("bookInfo")[i].innerHTML +=
+        myLibrary[i].notRead;
+      console.log("are we inside the loop?");
     }
+    console.log("did we get into addBook?");
   }
 };
