@@ -68,6 +68,7 @@ window.onload = function () {
     newBookBtn.appendChild(removeBtn);
 
     modal.style.display = "none";
+    form.reset();
     event.preventDefault();
   };
 
@@ -84,15 +85,11 @@ window.onload = function () {
     myLibrary.push(formResponse);
     for (let i = 0; i < myLibrary.length; i++) {
       console.log(myLibrary[i]);
-      document.getElementsByClassName("bookInfo")[i].innerHTML +=
-        myLibrary[i].title;
-      document.getElementsByClassName("bookInfo")[i].innerHTML +=
-        myLibrary[i].author;
-      document.getElementsByClassName("bookInfo")[i].innerHTML +=
-        myLibrary[i].pages;
-      document.getElementsByClassName("bookInfo")[i].innerHTML +=
-        myLibrary[i].read;
-      document.getElementsByClassName("bookInfo")[i].innerHTML +=
+      document.getElementsByClassName("bookInfo")[i].innerHTML =
+        myLibrary[i].title +
+        myLibrary[i].author +
+        myLibrary[i].pages +
+        myLibrary[i].read +
         myLibrary[i].notRead;
       console.log("are we inside the loop?");
     }
