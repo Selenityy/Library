@@ -27,8 +27,9 @@ window.onload = function () {
     }
   };
 
-  // clicking submit will add the newBook div to the books on the bookshelf with the read and remove buttons
+  // Clicking submit on the form triggers the following:
   submitBtn.onclick = function (event) {
+    // Setting up the div for the book submission
     const newBookDiv = document.createElement("div");
     newBookDiv.classList.add("newBook");
     books.appendChild(newBookDiv);
@@ -49,16 +50,14 @@ window.onload = function () {
     newBookPages.classList.add("bookPages");
     newBookInfo.appendChild(newBookPages);
 
-    // const newBookRead = document.createElement("div");
-    // newBookRead.classList.add("bookRead");
-    // newBookInfo.appendChild(newBookRead);
-
+    // Getting values of the form submission for the object constructor Book
     const strTitle = document.getElementById("title").value;
     const strAuthor = document.getElementById("author").value;
     const strPages = document.getElementById("pages").value;
     const strRead = document.querySelector('input[name="read"]:checked').value;
     const addBook = new Book(strTitle, strAuthor, strPages, strRead);
 
+    // Creating button div for read and remove
     const newBookBtn = document.createElement("div");
     newBookBtn.classList.add("bookBtn");
     newBookDiv.appendChild(newBookBtn);
@@ -73,15 +72,34 @@ window.onload = function () {
     removeBtn.textContent = "Remove";
     newBookBtn.appendChild(removeBtn);
 
+    readBtn.onclick = function (clickEvent) {
+      const buttonText = clickEvent.target.innerHTML;
+      if (buttonText === "Read") {
+        clickEvent.target.innerHTML = "Not Read";
+        console.log("are we inside the read if statement?");
+      } else if (buttonText === "Not Read") {
+        clickEvent.target.innerHTML = "Read";
+        console.log("are we inside the not read if statement?");
+      }
+    };
+
+    removeBtn.onclick = function (removeEvent) {
+        const removeIt = removeEvent.target.parentElement.parentElement;
+        removeIt.remove();
+    };
+
+    // Call the function to add the book
     addBookToLibrary(addBook);
     console.log("Are we here instead?");
 
+    // Closes the form window and resets
     modal.style.display = "none";
     form.reset();
     event.preventDefault();
   };
 
-  function Book(title, author, pages, read, notRead) {
+  // Book object constructor
+  function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -89,6 +107,7 @@ window.onload = function () {
     console.log("did we get into Book?" + title);
   }
 
+  // Add each form submission book to the library
   function addBookToLibrary(formResponse) {
     myLibrary.push(formResponse);
     for (let i = 0; i < myLibrary.length; i++) {
@@ -100,11 +119,9 @@ window.onload = function () {
       document.getElementsByClassName("bookPages")[i].innerHTML =
         myLibrary[i].pages + " " + "total pages";
       document.getElementsByClassName("toggle_read")[i].innerHTML =
-          myLibrary[i].read;
+        myLibrary[i].read;
       console.log("are we inside the loop?");
     }
     console.log("did we get into addBook?");
   }
-
-  
 };
