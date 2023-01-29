@@ -41,7 +41,7 @@ window.onload = function () {
     newBookTitle.classList.add("bookTitle");
     newBookInfo.appendChild(newBookTitle);
 
-    const newBookAuthor = document.createElement("div"); 
+    const newBookAuthor = document.createElement("div");
     newBookAuthor.classList.add("bookAuthor");
     newBookInfo.appendChild(newBookAuthor);
 
@@ -49,23 +49,15 @@ window.onload = function () {
     newBookPages.classList.add("bookPages");
     newBookInfo.appendChild(newBookPages);
 
-    const newBookRead = document.createElement("div");
-    newBookRead.classList.add("bookRead");
-    newBookInfo.appendChild(newBookRead);
+    // const newBookRead = document.createElement("div");
+    // newBookRead.classList.add("bookRead");
+    // newBookInfo.appendChild(newBookRead);
 
     const strTitle = document.getElementById("title").value;
     const strAuthor = document.getElementById("author").value;
     const strPages = document.getElementById("pages").value;
     const strRead = document.querySelector('input[name="read"]:checked').value;
-    const addBook = new Book(
-      strTitle,
-      strAuthor,
-      strPages,
-      strRead,
-    );
-
-    addBookToLibrary(addBook);
-    console.log("Are we here instead?");
+    const addBook = new Book(strTitle, strAuthor, strPages, strRead);
 
     const newBookBtn = document.createElement("div");
     newBookBtn.classList.add("bookBtn");
@@ -80,6 +72,9 @@ window.onload = function () {
     removeBtn.classList.add("toggle_remove");
     removeBtn.textContent = "Remove";
     newBookBtn.appendChild(removeBtn);
+
+    addBookToLibrary(addBook);
+    console.log("Are we here instead?");
 
     modal.style.display = "none";
     form.reset();
@@ -98,16 +93,18 @@ window.onload = function () {
     myLibrary.push(formResponse);
     for (let i = 0; i < myLibrary.length; i++) {
       console.log(myLibrary[i]);
-        document.getElementsByClassName("bookTitle")[i].innerHTML =
-            myLibrary[i].title;
-        document.getElementsByClassName("bookAuthor")[i].innerHTML = 
-            "by " + myLibrary[i].author;
-        document.getElementsByClassName("bookPages")[i].innerHTML =
-            myLibrary[i].pages + " " + "total pages";
-        document.getElementsByClassName("bookRead")[i].innerHTML =
-            myLibrary[i].read;
+      document.getElementsByClassName("bookTitle")[i].innerHTML =
+        myLibrary[i].title;
+      document.getElementsByClassName("bookAuthor")[i].innerHTML =
+        "by " + myLibrary[i].author;
+      document.getElementsByClassName("bookPages")[i].innerHTML =
+        myLibrary[i].pages + " " + "total pages";
+      document.getElementsByClassName("toggle_read")[i].innerHTML =
+          myLibrary[i].read;
       console.log("are we inside the loop?");
     }
     console.log("did we get into addBook?");
   }
+
+  
 };
