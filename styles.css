@@ -1,3 +1,7 @@
+:root {
+  --contentWidth: 1200px;
+}
+
 @font-face {
   font-family: "DidactGothic-Regular";
   src: url("./References/DidactGothic-Regular.woff");
@@ -9,6 +13,16 @@ html {
   height: 100vh;
 }
 
+body {
+  margin: 0;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 2fr;
+  grid-template-areas:
+    "header"
+    "bookshelf";
+}
+
 ul {
   list-style: none;
 }
@@ -17,6 +31,8 @@ button {
   font-family: "DidactGothic-Regular";
   font-size: 1rem;
 }
+
+/* --------------------- MODAL --------------------- */
 
 .modal {
   display: none;
@@ -33,23 +49,215 @@ button {
 }
 
 .modal_content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+  background-color: #d0efff;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 15%;
+  height: 30%;
 }
 
 .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#myForm {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding-right: 77px;
+  justify-content: center;
+}
+
+.pop_up {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+/* --------------------- HEADER --------------------- */
+
+header {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  /* grid-area: header;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-areas: 
+  "library"
+  "button";
+  padding: 20px 40px 0px 40px; */
+  background-color: #d0efff;
+  padding: 1rem max(1rem, 50vw - var(--contentWidth) / 2);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 4px;
+}
+
+.Library {
+  /* grid-area: library; */
+  font-size: 4rem;
+  font-weight: bolder;
+  color: #187bcd;
+  /* text-shadow: 1px 1px #03396c; */
+}
+
+.new_book {
+  /* grid-area: button; */
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 15px 0px 20px 0px;
+}
+
+#newBookBtn {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  border-radius: 70px;
+  padding: 13px;
+  transition-duration: 0.4s;
+  background-color: #187bcd;
+  color: white;
+  border: none;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+#newBookBtn:hover {
+  background-color: #03396c;
+  color: white;
+}
+
+#newBookBtn:active {
+  background-color: #03396c;
+  color: white;
+  box-shadow: 0 5px #404040;
+  transform: translateY(5px);
+  transition-duration: 0.4s;
+}
+
+/* --------------------- BOOKSHELF --------------------- */
+
+.bookshelf {
+  grid-area: bookshelf;
+  display: grid;
+  margin: 0;
+}
+
+/* --------------------- BOOKS --------------------- */
+
+.books {
+  display: grid;
+  padding: 1rem max(1rem, 50vw - var(--contentWidth) / 2);
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-auto-flow: row;
+  gap: 30px;
+  padding-top: 3%;
+}
+
+.newBook {
+  display: grid;
+  grid-template-rows: 70% 30%;
+  grid-template-areas:
+    "info"
+    "buttons";
+  background-color: #F5F5F5;
+  box-sizing: border-box;
+  border-radius: 25px;
+  border: 3px solid #187bcd;
+  height: 200px;
+  width: 275px;  
+  padding: 10px;
+}
+
+.bookInfo {
+  grid-area: info;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas:
+    "title"
+    "author"
+    "pages";
+  align-items: center;
+  justify-items: start;
+  align-content: center;
+  padding: 10px;
+  font-size: 1.3rem;
+}
+
+.bookTitle {
+  grid-area: title;
+}
+
+.bookAuthor {
+  grid-area: author;
+}
+
+.bookPages {
+  grid-area: pages;
+}
+
+.bookBtn {
+  grid-area: buttons;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  gap: 20px;
+}
+
+.toggle_read {
+  font-size: 1rem;
+}
+
+.toggle_remove {
+  font-size: 1rem;
+}
+
+.toggle_read,
+.toggle_remove {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  border-radius: 70px;
+  padding: 10px;
+  transition-duration: 0.4s;
+  background-color: #187bcd;
+  color: white;
+  border: none;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.toggle_read:hover,
+.toggle_remove:hover {
+  background-color: #03396c;
+  color: white;
+}
+
+.toggle_read:active,
+.toggle_remove:active {
+  background-color: #03396c;
+  color: white;
+  box-shadow: 0 5px #404040;
+  transform: translateY(5px);
+  transition-duration: 0.4s;
 }
