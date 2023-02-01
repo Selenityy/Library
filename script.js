@@ -82,7 +82,7 @@ window.onload = function () {
       document.getElementsByClassName("bookAuthor")[i].innerHTML =
         "by " + myLibrary[i].author;
       document.getElementsByClassName("bookPages")[i].innerHTML =
-        myLibrary[i].pages + "pages";
+        myLibrary[i].pages + " pages";
       document.getElementsByClassName("toggle_read")[i].innerHTML =
         myLibrary[i].read;
     }
